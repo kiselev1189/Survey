@@ -1,0 +1,15 @@
+<form action="/survey/{{survey.id}}/" method="post">{% csrf_token %}
+
+<ol class="survey-questions">
+			{% for field in response_form %}
+                <div>
+                    <label class="label-inline">{{ field.label }}</label>
+                    {{ field }}
+
+                </div>
+
+            {% endfor %}
+		</ol>
+
+		<div class="submit-button"><input type="submit" value="I'm done!"></div>
+	</form>
