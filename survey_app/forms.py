@@ -1,7 +1,8 @@
 __author__ = 'kis'
 from django import forms
 from django.forms import models
-from survey_app.models import Question, Survey, Response, AnswerText
+from survey_app.models import Question, Survey, Response, AnswerText, UserProfile
+from django.contrib.auth.models import User
 import uuid
 
 class ResponseForm(models.ModelForm):
@@ -41,3 +42,16 @@ class ResponseForm(models.ModelForm):
                 answer.save()
 
         return response
+
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ()

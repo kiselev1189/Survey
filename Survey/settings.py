@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'survey_app'
+    'bootstrap3',
+    'survey_app',
 )
 
 MIDDLEWARE_CLASSES = (
