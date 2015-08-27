@@ -1,8 +1,8 @@
 __author__ = 'kis'
 from django import forms
 from django.forms import models
-from survey_app.models import Question, Survey, Response, AnswerText, UserProfile
 from django.contrib.auth.models import User
+from survey_app.models import Question, Survey, Response, AnswerText, UserProfile
 import uuid
 
 class ResponseForm(models.ModelForm):

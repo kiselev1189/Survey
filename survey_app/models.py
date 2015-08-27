@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import django
 
 class Survey(models.Model):     # collection of unique questions
     name = models.CharField(max_length=400)

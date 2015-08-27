@@ -1,5 +1,5 @@
 from django.contrib import admin
-from survey_app.models import Survey, Response, Question, AnswerText, UserProfile
+from survey_app.models import Survey, Response, Question, AnswerText
 # Register your models here.
 
 class QuestionInline(admin.TabularInline):
@@ -20,5 +20,5 @@ class ResponseAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Survey, SurveyAdmin)
-admin.site.register(UserProfile)
+
 admin.site.register(Response, ResponseAdmin)
