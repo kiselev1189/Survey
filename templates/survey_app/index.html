@@ -1,17 +1,7 @@
 {% load bootstrap3 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-<!--
-{#% if survey_list %#}
-    <ul>
-    {#% for survey in survey_list %#}
-        <li><a href="/survey_app/{#  #}{ survey.id }}/">{#  #}{ survey.name }}</a></li>
-    {#% endfor %#}
-    </ul>
-{#% else %#}
-    <p>Empty.</p>
-{#% endif %#}
--->
+
 
 
 <!DOCTYPE html>
@@ -49,44 +39,29 @@
           <a class="navbar-brand" href="#">Survey List</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
+          <a href="/survey_app/register/" class="btn btn-success navbar-right">Sign Up</a>
+          <form class="navbar-form navbar-right" id="login_form" method="post" action="/survey_app/login/">
+            {% csrf_token %}
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input name="username" type="text" placeholder="Email" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input name="password" type="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign In</button>
-              <a href="/survey_app/register" class="btn btn-success">Sign Up</a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Survey List by kis</h1>
-        <p>This is a simple survey management website. Admins can create custom surveys for users to respond. </p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
+
 
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-          {% if survey_list %}
-              {% for survey in survey_list %}
-                  <div class="col-md-4">
-                      <h2>{{ survey.name }}</h2>
-                      <p>{{survey.descripion }}</p>
-                      <p><a class="btn btn-default" href="/survey_app/{{ survey.id }}" role="button">View details &raquo;</a></p>
-                  </div>
-              {% endfor %}
-          {% else %}
-            <h3>No surveys.</h3>
-          {% endif %}
-      </div>
+          {% block content %}{% endblock %}
+                </div>
 
       <hr>
 

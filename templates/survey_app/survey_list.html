@@ -1,0 +1,22 @@
+{% extends "survey_app/index.html" %}
+
+{% block content %}
+       <div class="jumbotron">
+      <div class="container">
+        <h1>Your Responses</h1>
+        <p>View your filled surveys there.</p>
+        <p><a class="btn btn-primary btn-lg" href="/survey_app/my_surveys" role="button">My Surveys &raquo;</a></p>
+      </div>
+    </div>
+{% if survey_list %}
+              {% for survey in survey_list %}
+                  <div class="col-md-4">
+                      <h2>{{ survey.name }}</h2>
+                      <p>{{survey.descripion }}</p>
+                      <p><a class="btn btn-default" href="/survey_app/{{ survey.id }}" role="button">View details &raquo;</a></p>
+                  </div>
+              {% endfor %}
+          {% else %}
+            <h3>No surveys.</h3>
+          {% endif %}
+{% endblock %}

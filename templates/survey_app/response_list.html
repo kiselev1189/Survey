@@ -1,0 +1,15 @@
+{% extends "survey_app/index.html" %}
+
+{% block content %}
+{% if response_list %}
+              {% for response in response_list %}
+                  <div class="col-md-4">
+                      <h2>{{ response.survey.name }}</h2>
+                      <p>{{response.survey.descripion }}</p>
+                      <p><a class="btn btn-default" href="/survey_app/{{ response.uuid }}" role="button">View details &raquo;</a></p>
+                  </div>
+              {% endfor %}
+          {% else %}
+            <h3>No surveys.</h3>
+          {% endif %}
+{% endblock %}
