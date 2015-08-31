@@ -11,15 +11,16 @@ def index(request):
     context = {"survey_list":survey_list}
     return render(request, 'survey_app/survey_list.html', context)
 
+@login_required
 def survey_detail(request, survey_id):
     survey = Survey.objects.get(id=survey_id)
     if request.method == 'POST':
-        form = ResponseForm(request.POST, survey=survey)
+        form = ResponseForm(request.POST, survey=survey, user=request.user)
         if form.is_valid():
             response = form.save()
-            return HttpResponseRedirect("/index.html")
+            return HttpResponseRedirect("/index")
     else:
-        form = ResponseForm(survey=survey)
+        form = ResponseForm(survey=survey, user=request.user)
         print(form)
 
     return render(request, "survey_app/survey.html", {"response_form":form, "survey":survey})

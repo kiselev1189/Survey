@@ -12,14 +12,14 @@ class ResponseForm(models.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.survey = kwargs.pop('survey')
+        self.user = UserProfile.objects.filter(user=kwargs.pop('user'))[0]
         super(ResponseForm, self).__init__(*args, **kwargs)
-
         self.uuid = uuid.uuid4().hex
 
         data = kwargs.get('data')
 
         for question in self.survey.questions():
-            self.fields["question_%d" % question.pk] = forms.CharField(label=question.text, widget=forms.Textarea)
+            self.fields["question_%d" % question.pk] = forms.CharField(label=question.text, widget=forms.Textarea, validators=[Question.QUESTION_VALIDATORS[question.question_type]])
 
             if data:
                 self.fields["question_%d" % question.pk].initial = data.get('question_%d' % question.pk)
@@ -29,6 +29,7 @@ class ResponseForm(models.ModelForm):
         response = super(ResponseForm, self).save(commit=False)
         response.survey = self.survey
         response.uuid = self.uuid
+        response.user = self.user
         response.save()
 
         for field_name, field_value in self.cleaned_data.items():
